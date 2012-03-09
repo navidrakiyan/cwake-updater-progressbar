@@ -2,7 +2,7 @@ CWAC Updater: App Updates, No Market Required
 =============================================
 
 You might not be distributing your app through an online market
-like <strike>the Android Market</strike>Google Play.
+like ~~the Android Market~~ Google Play.
 Perhaps your app is for internal-use
 within a business, non-profit, or other organization. Perhaps
 you are distributing a beta release to power users. Perhaps you
