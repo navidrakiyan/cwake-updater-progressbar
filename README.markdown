@@ -21,7 +21,9 @@ corporate VPN).
 This is available as a JAR file from the downloads area of
 this GitHub repo. The project itself is set up as an Android
 library project, in case you wish to use the source code in
-that fashion.
+that fashion. Note that if you use the JAR, you will also
+need the JARs for the dependencies, listed later in this
+document.
 
 Usage
 -----
