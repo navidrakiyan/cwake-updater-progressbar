@@ -214,9 +214,9 @@ higher.
 Version
 -------
 This is version v0.0.1 of this module, meaning it is just born.
-Not to be confused with Just Born, makers of Marshmallow Peeps&trade;
+Not to be confused with Just Born, makers of Marshmallow Peeps&trade;.
 
-Mmmmmmmmm... Peeps!
+(mmmmmmmm... Peeps!)
 
 Demo
 ----
@@ -254,6 +254,6 @@ Who Made This?
 
 Release Notes
 -------------
-* v0.1.0: initial release
+* v0.0.1: initial release
 
 [wakeful] https://github.com/commonsguy/cwac-wakeful
