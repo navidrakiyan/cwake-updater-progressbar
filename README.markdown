@@ -203,7 +203,7 @@ fresh update.
 
 Dependencies
 ------------
-This project relies upon the [CWAC WakefulIntentService][wakeful] project.
+This project relies upon the [CWAC WakefulIntentService](https://github.com/commonsguy/cwac-wakeful) project.
 A copy of compatible JARs can be found in the `libs/` directory
 of the project, though you are welcome to try newer ones, or
 ones that you have patched yourself.
@@ -256,4 +256,3 @@ Release Notes
 -------------
 * v0.0.1: initial release
 
-[wakeful] https://github.com/commonsguy/cwac-wakeful
