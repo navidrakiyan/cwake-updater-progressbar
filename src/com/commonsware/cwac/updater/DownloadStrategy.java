@@ -18,6 +18,21 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Parcelable;
 
+/**
+ * Interface for downloading an update APK
+ */
 public interface DownloadStrategy extends Parcelable {
+  /**
+   * Called to have the strategy download an update APK
+   * from somewhere. Will be called on a background thread,
+   * so time is not an issue. The resulting download
+   * needs to be a world-readable file, so the Android
+   * installer can do its work.
+   * 
+   * @param ctxt a generic Context for use in accessing resources, etc.
+   * @param updateURL value retrieved from VersionCheckStrategy to identify what you should download
+   * @return Uri pointing to downloaded update APK
+   * @throws Exception in case something goes wrong
+   */
   Uri downloadAPK(Context ctxt, String updateURL) throws Exception;
 }
