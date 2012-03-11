@@ -19,23 +19,42 @@ import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+/**
+ * Implementation of ConfirmationStrategy that simply
+ * returns true from confirm(), for cases where user
+ * confirmation is not necessary.
+ */
 public class ImmediateConfirmationStrategy implements
     ConfirmationStrategy {
+  /* (non-Javadoc)
+   * @see com.commonsware.cwac.updater.ConfirmationStrategy#confirm(android.content.Context, android.app.PendingIntent)
+   */
   @Override
   public boolean confirm(Context ctxt, PendingIntent contentIntent) {
     return(true);
   }
 
+  /* (non-Javadoc)
+   * @see android.os.Parcelable#describeContents()
+   */
   @Override
   public int describeContents() {
     return(0);
   }
 
+  /* (non-Javadoc)
+   * @see android.os.Parcelable#writeToParcel(android.os.Parcel, int)
+   */
   @Override
   public void writeToParcel(Parcel dest, int flags) {
     // no-op
   }
 
+  /**
+   * Required to complete Parcelable interface. Creates
+   * an ImmediateConfirmationStrategy instance or array
+   * upon demand.
+   */
   public static final Parcelable.Creator<ImmediateConfirmationStrategy> CREATOR=
       new Parcelable.Creator<ImmediateConfirmationStrategy>() {
         public ImmediateConfirmationStrategy createFromParcel(Parcel in) {
