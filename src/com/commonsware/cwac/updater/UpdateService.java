@@ -17,6 +17,7 @@ package com.commonsware.cwac.updater;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.util.Log;
 import com.commonsware.cwac.wakeful.WakefulIntentService;
 
@@ -85,7 +86,15 @@ public class UpdateService extends WakefulIntentService {
   }
 
   private void install(UpdateRequest req, Uri apk) {
-    Intent i=new Intent(Intent.ACTION_VIEW);
+    Intent i;
+    
+    if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+      i=new Intent(Intent.ACTION_INSTALL_PACKAGE);
+      i.putExtra(Intent.EXTRA_ALLOW_REPLACE, true);
+    }
+    else {
+      i=new Intent(Intent.ACTION_VIEW);
+    }
 
     i.setDataAndType(apk, "application/vnd.android.package-archive");
     i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

@@ -197,11 +197,17 @@ two parameters
 - a generic `Context`
 - the "update URL" from the `VersionCheckStrategy`
 
-There is one stock implementation of `DownloadStrategy` supplied
+There are two stock implementations of `DownloadStrategy` supplied
 by the library: `SimpleHttpDownloadStrategy`, which downloads
-the APK to external storage. Presently, it does not clean up the
-APK, though it will get rid of the old APK before downloading a
+the APK to external storage, and `InternalHttpDownloadStrategy`, which
+downloads the APK to a world-readable file on internal storage.
+Presently, neither clean up the
+APK, though they will get rid of the old APK before downloading a
 fresh update.
+
+Ideally, use `InternalHttpDownloadStrategy` only for small APK files or
+on API Level 11 or higher (where internal and external storage share the
+same data partition, so space concerns fall away).
 
 Dependencies
 ------------
@@ -211,14 +217,13 @@ of the project, though you are welcome to try newer ones, or
 ones that you have patched yourself.
 
 This library at present requires Android 2.2 (API Level 8) or
-higher.
+higher. To *build* the library, you will need API Level 14, as the
+library conditionally uses various newer APIs.
 
 Version
 -------
-This is version v0.0.1 of this module, meaning it is just born.
-Not to be confused with Just Born, makers of Marshmallow Peeps&trade;.
-
-(mmmmmmmm... Peeps!)
+This is version v0.0.2 of this module, meaning it hasn't been
+laughed into oblivion just yet.
 
 Demo
 ----
@@ -256,5 +261,6 @@ Who Made This?
 
 Release Notes
 -------------
-* v0.0.1: initial release
+- v0.0.2: added `InternalHttpDownloadStrategy`
+- v0.0.1: initial release
 
