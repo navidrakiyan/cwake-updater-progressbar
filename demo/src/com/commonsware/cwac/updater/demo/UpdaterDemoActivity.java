@@ -16,11 +16,13 @@ package com.commonsware.cwac.updater.demo;
 
 import android.app.Activity;
 import android.app.Notification;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 import com.commonsware.cwac.updater.ConfirmationStrategy;
 import com.commonsware.cwac.updater.DownloadStrategy;
+import com.commonsware.cwac.updater.InternalHttpDownloadStrategy;
 import com.commonsware.cwac.updater.NotificationConfirmationStrategy;
 import com.commonsware.cwac.updater.SimpleHttpDownloadStrategy;
 import com.commonsware.cwac.updater.SimpleHttpVersionCheckStrategy;
@@ -73,6 +75,10 @@ public class UpdaterDemoActivity extends Activity {
   }
 
   DownloadStrategy buildDownloadStrategy() {
+    if (Build.VERSION.SDK_INT>=11) {
+      return(new InternalHttpDownloadStrategy());
+    }
+    
     return(new SimpleHttpDownloadStrategy());
   }
 

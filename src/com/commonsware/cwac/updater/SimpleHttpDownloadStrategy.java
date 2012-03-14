@@ -15,8 +15,10 @@ limitations under the License.
 package com.commonsware.cwac.updater;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import android.content.Context;
@@ -43,7 +45,7 @@ public class SimpleHttpDownloadStrategy implements DownloadStrategy {
 
       if (status == 200) {
         InputStream is=conn.getInputStream();
-        FileOutputStream f=new FileOutputStream(apk);
+        OutputStream f=openDownloadFile(ctxt, apk);
         byte[] buffer=new byte[4096];
         int len1=0;
 
@@ -64,7 +66,7 @@ public class SimpleHttpDownloadStrategy implements DownloadStrategy {
       conn.disconnect();
     }
 
-    return(Uri.fromFile(apk));
+    return(getDownloadUri(ctxt, apk));
   }
 
   @Override
@@ -77,13 +79,21 @@ public class SimpleHttpDownloadStrategy implements DownloadStrategy {
     // no-op
   }
 
-  private static File getDownloadFile(Context ctxt) {
+  protected File getDownloadFile(Context ctxt) {
     File updateDir=
         new File(ctxt.getExternalFilesDir(null), ".CWAC-Update");
 
     updateDir.mkdirs();
 
     return(new File(updateDir, "update.apk"));
+  }
+  
+  protected OutputStream openDownloadFile(Context ctxt, File apk) throws FileNotFoundException {
+    return(new FileOutputStream(apk));
+  }
+  
+  protected Uri getDownloadUri(Context ctxt, File apk) {
+    return(Uri.fromFile(apk));
   }
 
   public static final Parcelable.Creator<SimpleHttpDownloadStrategy> CREATOR=
