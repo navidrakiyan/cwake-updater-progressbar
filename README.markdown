@@ -1,6 +1,8 @@
 CWAC Updater: App Updates, No Market Required
 =============================================
 
+**Work on this project has been suspended &mdash; please seek alternative solutions at this time**
+
 You might not be distributing your app through an online market
 like ~~the Android Market~~ Google Play.
 Perhaps your app is for internal-use
