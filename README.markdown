@@ -105,6 +105,8 @@ to use this lib do this steps:
       
  2- in your main activity add tihs :
  	protected String url = "http://www.simple.com/update/update.json";
+	
+	
  3- in your VersionCheckStrategy method add this :
  	
 	VersionCheckStrategy buildVersionCheckStrategy() {
