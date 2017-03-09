@@ -3,7 +3,9 @@ CWAC Updater: App Updates, No Market Required
 to use this lib do this steps:
 
 1- update SimpleHttpDownloadStrategy file to : 
+
  (this change add a static variable to get download filesize and show it in progressbar.)
+ 
   public static int Filesize;
 	final File SDCardRoot = Environment.getExternalStorageDirectory();
 	
@@ -104,7 +106,9 @@ to use this lib do this steps:
 	};
       
  2- in your main activity add tihs :
+ 
  	protected String url = "http://www.simple.com/update/update.json";
+	
 	
 	
  3- in your VersionCheckStrategy method add this :
@@ -139,6 +143,7 @@ to use this lib do this steps:
 		}
 		return (new SimpleHttpVersionCheckStrategy("http://www.simple.com/update/update.json"));
 	}
+ 
  
  4- add download_progress activity with xml view to show the download progress :
  
