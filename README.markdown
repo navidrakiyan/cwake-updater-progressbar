@@ -7,7 +7,6 @@ to use this lib do this steps:
  (this change add a static variable to get download filesize and show it in progressbar.)
  
   public class SimpleHttpDownloadStrategy implements DownloadStrategy {
-
 	public static int Filesize;
 	public float getStockName2() {
 		return this.Filesize;
