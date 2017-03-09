@@ -3,10 +3,8 @@ CWAC Updater: App Updates, No Market Required
 to use this lib do this steps:
 
 1- update SimpleHttpDownloadStrategy file to : 
-     
-     this change add a static variable to get download filesize and show it in progressbar.
-          
-	public static int Filesize;
+ (this change add a static variable to get download filesize and show it in progressbar.)
+  public static int Filesize;
 	final File SDCardRoot = Environment.getExternalStorageDirectory();
 	
 	public float getStockName2() {
@@ -104,4 +102,98 @@ to use this lib do this steps:
 			return (new SimpleHttpDownloadStrategy[size]);
 		}
 	};
-     
+      
+ 2- in your main activity add tihs :
+ 	protected String url = "http://www.simple.com/update/update.json";
+ 3- in your VersionCheckStrategy method add this :
+ 	
+	VersionCheckStrategy buildVersionCheckStrategy() {
+		int SDK_INT = android.os.Build.VERSION.SDK_INT;
+		if (SDK_INT > 8) {
+			StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+			StrictMode.setThreadPolicy(policy);
+			new Thread(new Runnable() {
+				public void run() {
+					try {
+						HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
+						conn.connect();
+						totalSize = conn.getContentLength();
+						Bundle bundle = new Bundle();
+						bundle.putInt("paramName", totalSize);
+						
+						// add this to show one progressbar inside activity 
+						Intent in = new Intent(MainActivity.this, download_progress.class);
+						in.putExtras(bundle);
+						startActivity(in);
+					} catch (MalformedURLException e2) {
+						// TODO Auto-generated catch block
+						e2.printStackTrace();
+					} catch (IOException e2) {
+						// TODO Auto-generated catch block
+						e2.printStackTrace();
+					}
+				}
+			}).start();
+		}
+		return (new SimpleHttpVersionCheckStrategy("http://www.simple.com/update/update.json"));
+	}
+ 
+ 4- add download_progress activity with xml view to show the download progress :
+ 
+ 
+	public class download_progress extends Activity {
+
+	private ProgressBar progressBar;
+	private int progressStatus = 0;
+	private TextView textView;
+	private Handler handler = new Handler();
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.updateprogressdialog);
+		progressBar = (ProgressBar) findViewById(R.id.update_progress_bar);
+		textView = (TextView) findViewById(R.id.update_progress);
+		System.currentTimeMillis();
+		Bundle bundle = getIntent().getExtras();
+		final int myParam = bundle.getInt("paramName");
+		final int get = myParam;
+		final SimpleHttpDownloadStrategy sim = new SimpleHttpDownloadStrategy();
+
+		progressBar.setMax(get);
+		new Thread(new Runnable() {
+			public void run() {
+				while (progressStatus < get) {
+					progressStatus = (int) sim.data_send_to_act(); // += 1;
+					handler.post(new Runnable() {
+						public void run() {
+							progressBar.setProgress(progressStatus);
+							textView.setText(progressStatus + "/" + progressBar.getMax());
+						}
+					});
+					try {
+						Thread.sleep(100);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}).start();
+	}
+
+	@Override
+	public void onBackPressed() {
+
+	}
+
+	@Override
+	public boolean onTouchEvent(MotionEvent event) {
+		return true;
+	}
+}
+
+
+Done!.
+run your app and update it into new version !!!.
+          
+	
