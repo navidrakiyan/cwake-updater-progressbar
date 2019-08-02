@@ -115,6 +115,13 @@ to use this lib do this steps:
  	protected String url = "http://www.simple.com/update/update.json";
 	
 	
+	php code to check update version file!!
+	{
+	"versionCode": 2,
+	"updateURL": "http://kiyanservice.ir/parmis_rakiyan/updates/apkfiles/ParmissRF.apk"
+	}
+
+	
 	
  3- in your VersionCheckStrategy method add this :
  	
