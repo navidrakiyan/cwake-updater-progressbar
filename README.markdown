@@ -118,7 +118,7 @@ to use this lib do this steps:
 	php code to check update version file!!
 	{
 	"versionCode": 2,
-	"updateURL": "http://kiyanservice.ir/parmis_rakiyan/updates/apkfiles/ParmissRF.apk"
+	"updateURL": "http://www.simple.com/update/apkfiles/ParmissRF.apk"
 	}
 
 	
